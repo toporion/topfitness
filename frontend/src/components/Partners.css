@@ -1,0 +1,37 @@
+/*
+ * Keyframe animation for the continuous right-to-left scroll.
+ */
+@keyframes scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    /* We move it by 50% because our list is duplicated. */
+    /* This creates a perfect, seamless loop. */
+    transform: translateX(-50%);
+  }
+}
+
+/*
+ * The container that masks the overflow and applies the gradient fade.
+ */
+.scroller-container {
+  position: relative;
+  overflow: hidden;
+  /* The ::before and ::after pseudo-elements create the fade effect */
+  -webkit-mask-image: linear-gradient(to right, transparent, white 20%, white 80%, transparent);
+  mask-image: linear-gradient(to right, transparent, white 20%, white 80%, transparent);
+}
+
+/*
+ * The scrolling element itself.
+ */
+.scroller {
+  display: flex;
+  align-items: center;
+  gap: 4rem; /* Space between partner names */
+  width: max-content; /* Ensure it doesn't wrap */
+  
+  /* Apply the animation */
+  animation: scroll 40s linear infinite;
+}

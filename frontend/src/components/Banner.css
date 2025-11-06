@@ -1,0 +1,35 @@
+/* Keyframe animation for the heartbeat line */
+@keyframes heartbeatAnimation {
+  0% { transform: translateX(100%); }
+  100% { transform: translateX(-100%); }
+}
+
+/* Base style for the heartbeat line */
+.heartbeat-line {
+  position: absolute;
+  top: 50%; /* Center vertically */
+  left: -100%; /* Start off-screen to the left */
+  width: 200%; /* Make it wide enough to cover the animation */
+  height: 2px; /* Thickness of the line */
+  background: linear-gradient(to right, 
+    transparent 0%, 
+    red 20%, 
+    red 25%, 
+    transparent 30%, 
+    transparent 70%, 
+    red 75%, 
+    red 80%, 
+    transparent 100%
+  ); /* Creates the ECG-like spikes */
+  animation: heartbeatAnimation 2s linear infinite; /* Apply animation */
+}
+
+/* Optional: a subtle pulse for the dot */
+@keyframes pulse-light {
+  0%, 100% { opacity: 0.7; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.2); }
+}
+
+.animate-pulse-light {
+  animation: pulse-light 1.5s ease-in-out infinite;
+}
