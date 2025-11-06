@@ -3,7 +3,7 @@ import React from 'react';
 
 const UseAxiosSecure = () => {
     const axiosSecure=axios.create({
-        baseURL:'http://localhost:8080/api'
+        baseURL:'https://topfitness-t2f1.vercel.app/api'
     });
 
     // Add a request interceptor
