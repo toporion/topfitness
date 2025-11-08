@@ -18,6 +18,7 @@ import PaymentSuccess from "../AdminPages/PaymentSuccess";
 import PaymentHistory from "../AdminPages/PaymentHistory";
 import NutritionPlanForm from "../AdminPages/NutritionPlanForm";
 import WorkoutPlanCreate from "../AdminPages/WorkoutPlanCreate";
+import TrainerClasses from "../AdminPages/TrainerClasses";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -45,6 +46,7 @@ const router = createBrowserRouter([
       { path: 'payment-history', element: <PaymentHistory/>},
       { path: 'nutrion-plan', element: <NutritionPlanForm/>},
       { path: 'workout-plan', element: <WorkoutPlanCreate/>},
+      {path:'trainer-classes',element:<TrainerClasses/>}
     ]
   }
 ]);

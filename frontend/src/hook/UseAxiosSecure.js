@@ -2,27 +2,28 @@ import axios from 'axios';
 import React from 'react';
 
 const UseAxiosSecure = () => {
-    const axiosSecure=axios.create({
-        baseURL:'https://topfitness-t2f1.vercel.app/api'
-    });
+  const axiosSecure = axios.create({
+    // baseURL: 'http://localhost:8080/api',
+    baseURL:'https://topfitness-t2f1.vercel.app/api'
+  });
 
-    // Add a request interceptor
-axiosSecure.interceptors.request.use(function (config) {
+  // Add a request interceptor
+  axiosSecure.interceptors.request.use(function (config) {
     // Do something before request is sent
-    const token=localStorage.getItem('token');
-    if(token){
-        config.headers.Authorization=`Bearer ${token}`;
+    const token = localStorage.getItem('token');
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
     }
     return config;
   }, function (error) {
     // Do something with request error
     return Promise.reject(error);
   },
-  
-);
 
-// Add a response interceptor
-axiosSecure.interceptors.response.use(function onFulfilled(response) {
+  );
+
+  // Add a response interceptor
+  axiosSecure.interceptors.response.use(function onFulfilled(response) {
     // Any status code that lie within the range of 2xx cause this function to trigger
     // Do something with response data
     return response;
@@ -32,7 +33,7 @@ axiosSecure.interceptors.response.use(function onFulfilled(response) {
     return Promise.reject(error);
   });
 
-    return axiosSecure;
+  return axiosSecure;
 };
 
 export default UseAxiosSecure;

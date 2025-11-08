@@ -42,6 +42,28 @@ const getAllClasses = async (req, res) => {
     }
 };
 
+const getClassByTrainerId = async (req, res) => {
+    console.log(req.body, req.user);
+    try {
+        const loggedInUserId = req.user.id;
+
+        const staffMember = await StaffModel.findOne({ userId: loggedInUserId })
+        if (!staffMember) {
+            return res.status(404).json({ message: "Trainer profile not found" })
+        }
+        const staffId = staffMember._id;
+        const classes = await FeaturedClassModel.find({ trainer: staffId })
+            .populate("trainer", "name email profileImage skill") // show trainer info
+            .populate("createdBy", "name email"); // optional
+        res.status(200).json({ success: true, data: classes });
+
+
+    } catch (error) {
+        console.log('inernal error', error);
+        res.status(500).json({ message: "Server error", error: error.message });
+    }
+}
+
 const getSingleClass = async (req, res) => {
     try {
         const { id } = req.params;
@@ -57,4 +79,4 @@ const getSingleClass = async (req, res) => {
 
 
 
-module.exports = { createClss, getAllClasses, getSingleClass };
+module.exports = { createClss, getAllClasses, getSingleClass, getClassByTrainerId };

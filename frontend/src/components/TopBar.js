@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 
 const TopBar = () => {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-    const { logOutUser } = UseAuth();
+    const { logOutUser, user } = UseAuth();
     const navigate = useNavigate();
 
     const handleLogout = () => {
@@ -15,7 +15,7 @@ const TopBar = () => {
 
     return (
         // Changed background, border, and made it sticky
-        <header className="bg-gray-800 h-16 px-6 flex justify-between items-center border-b border-gray-700 sticky top-0 z-10">
+        <header className="bg-gray-800 h-16 px-6 flex justify-between items-center border-b border-gray-700 sticky top-0 z-50">
             {/* Changed text color */}
             <div>
                 <h1 className="text-xl font-bold text-gray-100">Dashboard</h1>
@@ -49,12 +49,23 @@ const TopBar = () => {
                         onClick={() => setIsDropdownOpen(prev => !prev)}
                         className="flex items-center gap-2 p-1 rounded-lg hover:bg-gray-700"
                     >
-                        <img
-                            src="https://placehold.co/40x40/f8fafc/111827?text=JD"
-                            alt="User Avatar"
-                            className="w-9 h-9 rounded-full"
-                        />
-                        <span className="hidden sm:block font-semibold text-gray-200">John Doe</span>
+
+
+                        <div>
+                            {user?.name ? (
+                                <div className="flex items-center gap-2 font-semibold text-gray-200">
+                                    <img
+                                        src={user?.profileImage || '/default-avatar.png'}
+                                        alt="User Avatar"
+                                        className="w-9 h-9 rounded-full"
+                                    />
+                                    <span className="hidden sm:block">{user.name}</span>
+                                </div>
+                            ) : null}
+                        </div>
+
+
+
                         <ChevronDown size={16} className={`text-gray-400 transition-transform ${isDropdownOpen ? 'rotate-180' : ''}`} />
                     </button>
 
